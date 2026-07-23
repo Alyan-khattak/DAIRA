@@ -32,10 +32,71 @@ ___
 ### Prerequisites
 - Docker & Docker Compose
 
-### Run locally
+### Run with Docker (recommended)
 ```bash
 cp .env.example .env
 docker compose up --build
+```
+
+- Backend API: http://localhost:8000/health
+- ML service: http://localhost:8500/health
+- Postgres: localhost:5432
+
+### Running backend tests (Docker)
+```bash
+docker compose exec backend pytest
+```
+___
+
+## Local Development (without Docker)
+
+Useful when working on `backend/` or `ml/` in isolation (e.g. faster iteration, IDE debugging).
+Each service gets its **own** virtual environment since their dependencies differ significantly.
+
+### 1. Clone the repo
+```bash
+git clone <repo-url> daira
+cd daira
+```
+
+### 2. Set up the backend
+```bash
+cd backend
+
+# Arch Linux -- ensure python + pip are installed
+sudo pacman -S python python-pip
+
+python -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+# run the API
+uvicorn app.main:app --reload
+```
+Backend runs at http://localhost:8000/health
+
+Run tests:
+```bash
+pytest
+```
+
+Deactivate when done:
+```bash
+deactivate
+```
+
+### 3. Set up the ML service
+```bash
+cd ml
+
+python -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+# run the service
+uvicorn src.serve:app --reload --port 8500
 ```
 
 - Backend API: http://localhost:8000/health
