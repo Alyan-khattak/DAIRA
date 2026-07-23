@@ -1,0 +1,38 @@
+services:
+  # ---------------- Backend API ----------------
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - ENVIRONMENT=development
+      - ML_SERVICE_URL=http://ml:8500
+      - DATABASE_URL=postgresql://daira:daira@db:5432/daira
+    depends_on:
+      - ml
+      - db
+
+  # ---------------- ML Service ----------------
+  ml:
+    build: ./ml
+    ports:
+      - "8500:8500"
+    volumes:
+      - ./ml:/app
+
+  # ---------------- Database ----------------
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=daira
+      - POSTGRES_PASSWORD=daira
+      - POSTGRES_DB=daira
+    volumes:
+      - daira_pgdata:/var/lib/postgresql/data
+
+volumes:
+  daira_pgdata:

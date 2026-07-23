@@ -1,0 +1,40 @@
+# ---------------- Python ----------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# ---------------- Environment ----------------
+.env
+*.env.local
+
+# ---------------- Jupyter ----------------
+.ipynb_checkpoints/
+
+# ---------------- ML artifacts & data ----------------
+# Data and trained models should never hit git history -- track structure via
+# .gitkeep, not content. Large binaries belong in S3 / DVC / cloud storage
+# once the pipeline is real.
+ml/data/raw/*
+!ml/data/raw/.gitkeep
+ml/data/processed/*
+!ml/data/processed/.gitkeep
+ml/data/features/*
+!ml/data/features/.gitkeep
+ml/models/*
+!ml/models/.gitkeep
+
+# ---------------- Frontend ----------------
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# ---------------- OS / Editor ----------------
+.DS_Store
+.vscode/
+*.swp
+
+# ---------------- Docker ----------------
+*.log
