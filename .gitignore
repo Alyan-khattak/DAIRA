@@ -17,14 +17,14 @@ venv/
 # Data and trained models should never hit git history -- track structure via
 # .gitkeep, not content. Large binaries belong in S3 / DVC / cloud storage
 # once the pipeline is real.
-ml/data/raw/*
-!ml/data/raw/.gitkeep
-ml/data/processed/*
-!ml/data/processed/.gitkeep
-ml/data/features/*
-!ml/data/features/.gitkeep
-ml/models/*
-!ml/models/.gitkeep
+# ml/data/raw/*
+# !ml/data/raw/.gitkeep
+# ml/data/processed/*
+# !ml/data/processed/.gitkeep
+# ml/data/features/*
+# !ml/data/features/.gitkeep
+# ml/models/*
+# !ml/models/.gitkeep
 
 # ---------------- Frontend ----------------
 frontend/node_modules/
